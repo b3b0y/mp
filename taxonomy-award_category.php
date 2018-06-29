@@ -1,11 +1,7 @@
 <?php
 /**
- * The main template file.
+ * The template for displaying Archive pages.
  *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
  * @package Baroque
@@ -13,63 +9,80 @@
 
 get_header();
 
+$award_view = baroque_get_option( 'award_style' );
+$type_nav  = baroque_get_option( 'type_nav_award' );
+$css       = 'clearfix';
+$row_css   = '';
+
+if ( $award_view == 'grid' ) {
+	$row_css = 'row';
+} elseif ( $award_view == 'masonry' ) {
+	$row_css = 'baroque-post-row';
+}
+
+$col = 'col-md-8 col-xs-12 col-sm-12';
 
 ?>
 
-<div class="page-header page-header-default" style="padding-top: 0;">
-	<div class="container">
-		<div class="row">
-			<div class=" col-md-12col-sm-12 col-xs-12">
-				<img src="<?php  echo  get_theme_mod('award_image'); ?>" class="img-responsive">
-				<h3><?php  echo  get_theme_mod('award_header_title'); ?></h3>
-				<p> <?php  echo  get_theme_mod('award_description'); ?> </p>
-			</div>
-		</div>
-		</p>
-	</div>
-</div>
-
-<div class="portfolio-masonry">
-	<div id="primary" class="content-area <?php baroque_content_columns(); ?>">
-
-		<?php do_action( 'baroque_award_category_content_before' ); ?>
+<div id="primary" class="content-area <?php baroque_content_columns(); ?>">
+	<main id="main" class="site-main <?php echo esc_attr( $award_view == 'text' ? 'row' : '' ); ?>">
 
 		<?php if ( have_posts() ) : ?>
 
 			<?php /* Start the Loop */ ?>
 
-			<div class="ba-portfolio-content">
-				<div class="ba-portfolio-loading">
+			<div class="ba-award-content <?php echo esc_attr( $award_view == 'text' ? $col : '' ); ?>">
+				<div class="ba-award-loading">
 					<span class="loading-icon">
 						<span class="bubble"><span class="dot"></span></span>
 						<span class="bubble"><span class="dot"></span></span>
 						<span class="bubble"><span class="dot"></span></span>
 					</span>
 				</div>
-				<div class="list-portfolio">
-					<?php while ( have_posts() ) : the_post(); ?>
 
-						<?php
+				<div class="<?php echo esc_attr( $row_css ) ?>">
 
-						/* Include the Post-Format-specific template for the content.
-						 * If you want to override this in a child theme, then include a file
-						 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-						 */
-						get_template_part( 'parts/content', 'award' );
-						?>
+					<div class="baroque-post-list <?php echo esc_attr( $css ) ?>">
 
-					<?php endwhile; ?>
+						<?php while ( have_posts() ) : the_post(); ?>
+
+							<?php
+							/* Include the Post-Format-specific template for the content.
+							 * If you want to override this in a child theme, then include a file
+							 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
+							 */
+							get_template_part( 'parts/content', 'award' );
+
+							?>
+
+						<?php endwhile; ?>
+
+					</div>
+					<!--.baroque-post-list-->
+
 				</div>
-			<?php baroque_numeric_pagination(); ?>
-		</div>
+				<!--.row-->
+
+				<?php
+				if ( $type_nav == 'numeric' ) {
+					baroque_numeric_pagination();
+				} else {
+					baroque_paging_nav();
+				}
+				?>
+
+			</div><!--.ba-award-content-->
+
 		<?php else : ?>
 
 			<?php get_template_part( 'parts/content', 'none' ); ?>
 
 		<?php endif; ?>
 
-		<?php do_action( 'baroque_award_category_content_after' ); ?>
 
-	</div><!-- #primary -->
-</div>
+	</main>
+	<!-- #main -->
+</div><!-- #primary -->
+
+<?php get_sidebar(); ?>
 <?php get_footer(); ?>

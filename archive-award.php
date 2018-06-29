@@ -27,13 +27,6 @@ $col = 'col-md-8 col-xs-12 col-sm-12';
 <div id="primary" class="content-area <?php baroque_content_columns(); ?>">
 	<main id="main" class="site-main <?php echo esc_attr( $award_view == 'text' ? 'row' : '' ); ?>">
 
-		<?php
-		/* baroque_award_text_categories
-		 *
-		 */
-		do_action( 'baroque_before_archive_post_list' );
-		?>
-
 		<?php if ( have_posts() ) : ?>
 
 			<?php /* Start the Loop */ ?>
@@ -58,7 +51,8 @@ $col = 'col-md-8 col-xs-12 col-sm-12';
 							 * If you want to override this in a child theme, then include a file
 							 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
 							 */
-							get_template_part( 'parts/content', get_post_format() );
+							get_template_part( 'parts/content', 'award' );
+
 							?>
 
 						<?php endwhile; ?>

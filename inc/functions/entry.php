@@ -1,5 +1,7 @@
 <?php
 
+
+
 /**
  * Get award description
  *
@@ -37,7 +39,7 @@ endif;
 
 
 /**
- * Check is blog
+ * Check is award
  *
  * @since  1.0
  */

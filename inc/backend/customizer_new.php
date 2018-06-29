@@ -254,7 +254,6 @@ function baroque_customize_settings_new() {
 				'grid'    => esc_html__( 'Grid', 'baroque' ),
 				'list'    => esc_html__( 'List', 'baroque' ),
 				'masonry' => esc_html__( 'Masonry', 'baroque' ),
-				'classic' => esc_html__( 'Classic', 'baroque' ),
 				'text'    => esc_html__( 'Text', 'baroque' ),
 			),
 		),
@@ -278,18 +277,7 @@ function baroque_customize_settings_new() {
 				),
 			),
 		),
-		'award_entry_meta'              => array(
-			'type'     => 'multicheck',
-			'label'    => esc_html__( 'Entry Meta', 'baroque' ),
-			'section'  => 'award_page',
-			'default'  => array( 'date', 'cat' ),
-			'choices'  => array(
-				'date' => esc_html__( 'Date', 'baroque' ),
-				'cat'  => esc_html__( 'Categories', 'baroque' ),
-			),
-			'priority' => 10,
-		),
-		'excerpt_length'               => array(
+		'award_excerpt_length'               => array(
 			'type'     => 'number',
 			'label'    => esc_html__( 'Excerpt Length', 'baroque' ),
 			'section'  => 'award_page',
@@ -301,42 +289,7 @@ function baroque_customize_settings_new() {
 			'section' => 'award_page',
 			'default' => '<hr/>',
 		),
-		'award_cat_filter'              => array(
-			'type'     => 'toggle',
-			'default'  => 0,
-			'label'    => esc_html__( 'Categories Filter', 'baroque' ),
-			'section'  => 'award_page',
-			'priority' => 10,
-		),
-		'award_categories_numbers'      => array(
-			'type'            => 'number',
-			'label'           => esc_html__( 'Categories Numbers', 'baroque' ),
-			'section'         => 'award_page',
-			'default'         => '5',
-			'priority'        => 10,
-			'active_callback' => array(
-				array(
-					'setting'  => 'award_cat_filter',
-					'operator' => '==',
-					'value'    => true,
-				),
-			),
-		),
-		'award_categories'              => array(
-			'type'            => 'textarea',
-			'label'           => esc_html__( 'Categories slug', 'baroque' ),
-			'section'         => 'award_page',
-			'default'         => '',
-			'priority'        => 10,
-			'description'     => esc_html__( 'Enter categories slug you want to display. Each slug is separated by comma character ",". If empty, it will display default', 'baroque' ),
-			'active_callback' => array(
-				array(
-					'setting'  => 'award_cat_filter',
-					'operator' => '==',
-					'value'    => 1,
-				),
-			),
-		),
+
 		'award_custom_field_2'          => array(
 			'type'    => 'custom',
 			'section' => 'award_page',
@@ -408,22 +361,6 @@ function baroque_customize_settings_new() {
 			'section'     => 'single_post_award',
 			'default'     => 1,
 			'priority'    => 10,
-		),
-		'post_entry_meta_award'              => array(
-			'type'     => 'multicheck',
-			'label'    => esc_html__( 'Entry Meta', 'baroque' ),
-			'section'  => 'single_post_award',
-			'default'  => array( 'date', 'cat' ),
-			'choices'  => array(
-				'date' => esc_html__( 'Date', 'baroque' ),
-				'cat'  => esc_html__( 'Categories', 'baroque' ),
-			),
-			'priority' => 10,
-		),
-		'post_custom_field_1_award'          => array(
-			'type'    => 'custom',
-			'section' => 'single_post_award',
-			'default' => '<hr/>',
 		),
 
 		'show_post_social_share_award' => array(

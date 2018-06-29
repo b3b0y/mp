@@ -30,7 +30,7 @@ function baroque_the_archive_title_new( $title ) {
 	if ( is_search() ) {
 		$title = esc_html__( 'Search Results', 'baroque' );
 
-	} elseif ( is_home() && ! is_front_page() ) {
+	} elseif ( baroque_is_award() ) {
 		$title = wp_kses( baroque_get_option( 'award_page_header_title' ), wp_kses_allowed_html( 'post' ) );
 
 		if ( ! $title ) {
@@ -42,4 +42,4 @@ function baroque_the_archive_title_new( $title ) {
 	return $title;
 }
 
-add_filter( 'get_the_archive_title_new', 'baroque_the_archive_title_new' );
+add_filter( 'get_the_archive_title', 'baroque_the_archive_title_new' );
